@@ -10,7 +10,7 @@ public static class ServiceRegistration
     {
         services.AddDbContext<TosunBankDbContext>(opt =>
         {
-            opt.UseNpgsql(connectionString: connectionString);
+            opt.UseNpgsql(connectionString: connectionString, b => b.MigrationsAssembly("FinalCase_TosunBank.WebApi"));
         });
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         return services;

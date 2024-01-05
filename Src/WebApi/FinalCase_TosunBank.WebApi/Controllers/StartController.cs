@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace FinalCase_TosunBank.WebApi.Controllers;
 
@@ -11,6 +13,7 @@ public class StartController : ControllerBase
         
     }
 
+    [AllowAnonymous]
     [HttpGet("")]
     public async Task<IActionResult> GetAll()
     {
