@@ -20,7 +20,6 @@
     <Folder Include="Features\Commands\" />
     <Folder Include="Features\MappingProfiles\" />
     <Folder Include="Features\Queries\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 

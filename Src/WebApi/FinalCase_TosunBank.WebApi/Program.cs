@@ -2,17 +2,24 @@ using FinalCase_TosunBank.Application;
 using FinalCase_TosunBank.Domain.Entities;
 using FinalCase_TosunBank.Persistence;
 using FinalCase_TosunBank.Persistence.Context;
+using FinalCase_TosunBank.WebApi.TokenOperations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebAPI.Middlewares;
+using WebAPI.Services;
+using WebAPI.TokenOperations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<ILogService, ConsoleLogger>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration.GetConnectionString("default"));
 builder.Services.AddIdentity<Person, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -31,7 +38,7 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -50,6 +57,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCustomExceptionMiddle();
 
 app.MapControllers();
 
