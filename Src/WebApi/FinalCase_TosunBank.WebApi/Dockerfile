@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Src/WebApi/FinalCase_TosunBank.WebApi/FinalCase_TosunBank.WebApi.csproj", "Src/WebApi/FinalCase_TosunBank.WebApi/"]
+COPY ["Src/Core/FinalCase_TosunBank.Application/FinalCase_TosunBank.Application.csproj", "Src/Core/FinalCase_TosunBank.Application/"]
+COPY ["Src/Infrastructure/FinalCase_TosunBank.Persistence/FinalCase_TosunBank.Persistence.csproj", "Src/Infrastructure/FinalCase_TosunBank.Persistence/"]
+COPY ["Src/Core/FinalCase_TosunBank.Domain/FinalCase_TosunBank.Domain.csproj", "Src/Core/FinalCase_TosunBank.Domain/"]
 RUN dotnet restore "Src/WebApi/FinalCase_TosunBank.WebApi/FinalCase_TosunBank.WebApi.csproj"
 COPY . .
 WORKDIR "/src/Src/WebApi/FinalCase_TosunBank.WebApi"
