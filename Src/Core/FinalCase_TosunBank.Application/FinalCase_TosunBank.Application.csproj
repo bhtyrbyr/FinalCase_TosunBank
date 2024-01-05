@@ -16,4 +16,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Commands\" />
+    <Folder Include="Features\MappingProfiles\" />
+    <Folder Include="Features\Queries\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
