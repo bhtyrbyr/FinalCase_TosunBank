@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{4DE192
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{263313F3-F96F-4667-B30B-D49B574ABE45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalCase_TosunBank.Application", "Src\Core\FinalCase_TosunBank.Application\FinalCase_TosunBank.Application.csproj", "{BD6AFB81-AB01-4109-84A4-5A5569E98F80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalCase_TosunBank.Application", "Src\Core\FinalCase_TosunBank.Application\FinalCase_TosunBank.Application.csproj", "{BD6AFB81-AB01-4109-84A4-5A5569E98F80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalCase_TosunBank.Domain", "Src\Core\FinalCase_TosunBank.Domain\FinalCase_TosunBank.Domain.csproj", "{00683439-B42E-483E-B274-F472AB092F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalCase_TosunBank.Domain", "Src\Core\FinalCase_TosunBank.Domain\FinalCase_TosunBank.Domain.csproj", "{00683439-B42E-483E-B274-F472AB092F6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalCase_TosunBank.Persistence", "Src\Infrastructure\FinalCase_TosunBank.Persistence\FinalCase_TosunBank.Persistence.csproj", "{1CDE72A8-FF09-401F-9685-B73ADF5E1BED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalCase_TosunBank.Persistence", "Src\Infrastructure\FinalCase_TosunBank.Persistence\FinalCase_TosunBank.Persistence.csproj", "{1CDE72A8-FF09-401F-9685-B73ADF5E1BED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalCase_TosunBank.WebApi", "Src\WebApi\FinalCase_TosunBank.WebApi\FinalCase_TosunBank.WebApi.csproj", "{EB051E05-5B15-4CD7-9CFA-63C2A4B151EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalCase_TosunBank.WebApi", "Src\WebApi\FinalCase_TosunBank.WebApi\FinalCase_TosunBank.WebApi.csproj", "{EB051E05-5B15-4CD7-9CFA-63C2A4B151EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

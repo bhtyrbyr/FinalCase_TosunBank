@@ -5,7 +5,6 @@ namespace FinalCase_TosunBank.Domain.Entities;
 
 public class Customer : BasePerson
 {
-    public string CustomerNo { get; set; }
     public double Salary { get; set; }
     public bool SalaryCustomer { get; set; }
     public float CreditScore { get; set; }

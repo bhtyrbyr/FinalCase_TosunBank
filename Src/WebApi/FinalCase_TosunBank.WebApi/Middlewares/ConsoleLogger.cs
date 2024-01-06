@@ -7,7 +7,8 @@ namespace WebAPI.Services
         public void Write(params object[] messageParams)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.Write("[Console Logger]");
+            Console.Write("[Console Logger] ");
+            Console.Write(DateTime.UtcNow);
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write(" | ");
             for (int i = 0; i < messageParams.Length; i += 2)

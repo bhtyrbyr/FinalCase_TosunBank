@@ -1,6 +1,8 @@
 ﻿using FinalCase_TosunBank.Application.Repository;
+using FinalCase_TosunBank.Domain.Common;
 using FinalCase_TosunBank.Persistence.Context;
 using FinalCase_TosunBank.Persistence.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +17,7 @@ public static class ServiceRegistration
             opt.UseNpgsql(connectionString: connectionString, b => b.MigrationsAssembly("FinalCase_TosunBank.Persistence"));
         });
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        services.AddIdentity<BasePerson, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
 
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IAccountStatementRepository, AccountStatementRepository>();

@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
@@ -25,10 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\FinalCase_TosunBank.Application\FinalCase_TosunBank.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\FinalCase_TosunBank.Persistence\FinalCase_TosunBank.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

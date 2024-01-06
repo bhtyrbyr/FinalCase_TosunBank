@@ -4,6 +4,7 @@ using System.Text;
 using FinalCase_TosunBank.Domain.Common;
 using FinalCase_TosunBank.WebApi.TokenOperations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI.TokenOperations;
@@ -14,7 +15,7 @@ public class AuthService : IAuthService
     private readonly UserManager<BasePerson> _userManager;
     private readonly SignInManager<BasePerson> _signingManager;
 
-    public AuthService(IConfiguration configuration, UserManager<BasePerson> userManager, RoleManager<IdentityRole> roleManager, SignInManager<BasePerson> signingManager)
+    public AuthService(IConfiguration configuration, UserManager<BasePerson> userManager, SignInManager<BasePerson> signingManager)
     {
         _configuration = configuration;
         _userManager = userManager;

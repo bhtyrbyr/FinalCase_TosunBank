@@ -1,43 +1,15 @@
 using FinalCase_TosunBank.Application;
-using FinalCase_TosunBank.Domain.Common;
 using FinalCase_TosunBank.Persistence;
-using FinalCase_TosunBank.Persistence.Context;
-using FinalCase_TosunBank.WebApi.TokenOperations;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using WebAPI.Middlewares;
 using WebAPI.Services;
-using WebAPI.TokenOperations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<ILogService, ConsoleLogger>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration.GetConnectionString("default"));
-builder.Services.AddIdentity<BasePerson, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
+builder.Services.AddApplicationServices(builder.Configuration);
 
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateLifetime = true,
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JWT:Issuer"],
-        ValidAudience = builder.Configuration["JWT:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
-        ClockSkew = TimeSpan.Zero
-    };
-});
 builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
