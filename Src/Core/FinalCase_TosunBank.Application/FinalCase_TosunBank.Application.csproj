@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTOs\" />
     <Folder Include="Features\Commands\" />
     <Folder Include="Features\MappingProfiles\" />
     <Folder Include="Features\Queries\" />
