@@ -21,7 +21,10 @@
     <Folder Include="Features\Commands\" />
     <Folder Include="Features\MappingProfiles\" />
     <Folder Include="Features\Queries\" />
-    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinalCase_TosunBank.Domain\FinalCase_TosunBank.Domain.csproj" />
   </ItemGroup>
 
 </Project>
