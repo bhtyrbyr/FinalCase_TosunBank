@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using FinalCase_TosunBank.Domain.Entities;
+using FinalCase_TosunBank.Domain.Common;
 using FinalCase_TosunBank.WebApi.TokenOperations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -11,10 +11,10 @@ namespace WebAPI.TokenOperations;
 public class AuthService : IAuthService
 {
     private readonly IConfiguration _configuration;
-    private readonly UserManager<Person> _userManager;
-    private readonly SignInManager<Person> _signingManager;
+    private readonly UserManager<BasePerson> _userManager;
+    private readonly SignInManager<BasePerson> _signingManager;
 
-    public AuthService(IConfiguration configuration, UserManager<Person> userManager, RoleManager<IdentityRole> roleManager, SignInManager<Person> signingManager)
+    public AuthService(IConfiguration configuration, UserManager<BasePerson> userManager, RoleManager<IdentityRole> roleManager, SignInManager<BasePerson> signingManager)
     {
         _configuration = configuration;
         _userManager = userManager;
@@ -29,7 +29,6 @@ public class AuthService : IAuthService
             return (string.Empty, "The username or password is incorrect.");
         }
 
-        //if (!await _userManager.CheckPasswordAsync(user, password))
         var result = await _signingManager.PasswordSignInAsync(user, password, false, false);
         if (!result.Succeeded)
         {

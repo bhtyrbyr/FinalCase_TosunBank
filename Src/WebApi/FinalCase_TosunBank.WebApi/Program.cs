@@ -1,5 +1,5 @@
 using FinalCase_TosunBank.Application;
-using FinalCase_TosunBank.Domain.Entities;
+using FinalCase_TosunBank.Domain.Common;
 using FinalCase_TosunBank.Persistence;
 using FinalCase_TosunBank.Persistence.Context;
 using FinalCase_TosunBank.WebApi.TokenOperations;
@@ -18,7 +18,7 @@ builder.Services.AddSingleton<ILogService, ConsoleLogger>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration.GetConnectionString("default"));
-builder.Services.AddIdentity<Person, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<BasePerson, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
 
 
 builder.Services.AddAuthentication(options =>
