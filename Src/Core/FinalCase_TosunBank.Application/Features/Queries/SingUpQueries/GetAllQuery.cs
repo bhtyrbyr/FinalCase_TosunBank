@@ -5,9 +5,9 @@ using MediatR;
 
 namespace FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
 
-public class GetAllQuery : IRequest<List<SingupViewDTO>>
+public class GetAllQuery : IRequest<List<SignUpViewDTO>>
 {
-    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<SingupViewDTO>>
+    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<SignUpViewDTO>>
     {
         private readonly IPreRegistrationRepository _preRegistrationRepository;
         private readonly IMapper _mapper;
@@ -18,10 +18,10 @@ public class GetAllQuery : IRequest<List<SingupViewDTO>>
             _mapper = mapper;
         }
 
-        public async Task<List<SingupViewDTO>> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<List<SignUpViewDTO>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
             var list = await _preRegistrationRepository.GetAllAsync();
-            var result = _mapper.Map<List<SingupViewDTO>>(list);
+            var result = _mapper.Map<List<SignUpViewDTO>>(list);
             return result;
         }
     }

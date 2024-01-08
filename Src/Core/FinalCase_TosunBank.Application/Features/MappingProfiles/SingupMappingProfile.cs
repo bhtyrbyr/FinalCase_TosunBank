@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
 using FinalCase_TosunBank.Application.DTOs.SingupDTOs;
 using FinalCase_TosunBank.Domain.Entities;
 
@@ -8,6 +9,7 @@ public class SingupMappingProfile : Profile
 {
     public SingupMappingProfile()
     {
-        CreateMap<PreRegistration, SingupViewDTO>();
+        CreateMap<PreRegistration, SignUpViewDTO>();
+        CreateMap<SignUpCreateDTO, PreRegistration>();
     }
 }

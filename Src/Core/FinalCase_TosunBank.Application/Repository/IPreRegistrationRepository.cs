@@ -4,4 +4,5 @@ namespace FinalCase_TosunBank.Application.Repository;
 
 public interface IPreRegistrationRepository : IGenericRepository<PreRegistration, int>
 {
+    Task<PreRegistration> FindByNationalityNumberAsync(string NationalityNumber);
 }

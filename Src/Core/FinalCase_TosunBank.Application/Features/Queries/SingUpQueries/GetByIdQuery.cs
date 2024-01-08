@@ -5,12 +5,12 @@ using MediatR;
 
 namespace FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
 
-public class GetByIdQuery : IRequest<SingupViewDTO>
+public class GetByIdQuery : IRequest<SignUpViewDTO>
 {
     private readonly int Id;
     public GetByIdQuery(int id) => Id = id;
 
-    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, SingupViewDTO>
+    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, SignUpViewDTO>
     {
         private readonly IPreRegistrationRepository _preRegistrationRepository;
         private readonly IMapper _mapper;
@@ -20,11 +20,11 @@ public class GetByIdQuery : IRequest<SingupViewDTO>
             _preRegistrationRepository = preRegistrationRepository;
             _mapper = mapper;
         }
-        public async Task<SingupViewDTO> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<SignUpViewDTO> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
             var record = await _preRegistrationRepository.GetByIdAsync(request.Id);
             if(record is null) throw new ArgumentNullException(nameof(record));
-            var result = _mapper.Map<SingupViewDTO>(record);
+            var result = _mapper.Map<SignUpViewDTO>(record);
             return result;
         }
     }

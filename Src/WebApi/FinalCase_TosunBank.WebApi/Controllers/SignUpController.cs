@@ -1,5 +1,7 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
+using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Create;
 using FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +40,15 @@ public class SignUpController : ControllerBase
     }
 
     [HttpPost(Name = "SignUp")]
-    public async Task<IActionResult> SignUp([FromBody] CreateDTO model)
+    public async Task<IActionResult> SignUp([FromBody] SignUpCreateDTO model)
     {
-        return Ok();
+        var commandValidator = new CreateCommandValidator();
+        await commandValidator.ValidateAndThrowAsync(model);
+        var command = new CreateCommand(model);
+        var result = await _mediator.Send(command);
+        if (result)
+            return CreatedAtAction(nameof(GetById), new { id = command.Id }, null);
+        return BadRequest("Failed to create a record!");
     }
 
     [HttpPut("{id}", Name = "ConfigPreRegistration")]

@@ -1,6 +1,6 @@
 ﻿namespace FinalCase_TosunBank.Application.DTOs.SingupDTOs;
 
-public class SingupViewDTO
+public class SignUpViewDTO
 {
     public int Id { get; set; }
     public string Email { get; set; }

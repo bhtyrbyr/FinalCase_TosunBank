@@ -23,13 +23,13 @@ public class GenericRepository<T, IdType> : IGenericRepository<T, IdType> where 
         return await _dbContext.Set<T>().FindAsync(id);
     }
 
-    public async void CreateAsync(T entity)
+    public async Task CreateAsync(T entity)
     {
         await _dbContext.AddAsync(entity);
         await _dbContext.SaveChangesAsync();
     }
 
-    public async void DeleteAsync(IdType entity)
+    public async Task DeleteAsync(IdType entity)
     {
         var record = await _dbContext.Set<T>().FindAsync(entity);
         if(record is null)
@@ -40,7 +40,7 @@ public class GenericRepository<T, IdType> : IGenericRepository<T, IdType> where 
         await _dbContext.SaveChangesAsync();
     }
 
-    public async void UpdateAsync(T entity)
+    public async Task UpdateAsync(T entity)
     {
         _dbContext.Update(entity);
         await _dbContext.SaveChangesAsync();

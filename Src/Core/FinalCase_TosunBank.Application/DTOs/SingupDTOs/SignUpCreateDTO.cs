@@ -1,6 +1,6 @@
 ﻿namespace FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
 
-public class CreateDTO
+public class SignUpCreateDTO
 {
     public string Email { get; set; }
     public string FirstName { get; set; }
