@@ -1,4 +1,5 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
+using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Confirmation;
 using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Create;
 using FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
 using FluentValidation;
@@ -53,8 +54,10 @@ public class SignUpController : ControllerBase
 
     [HttpPut("{id}", Name = "ConfigPreRegistration")]
     [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
-    public async Task<IActionResult> ConfirmPreRegistration(int id)
+    public async Task<IActionResult> ConfirmPreRegistration(int id, [FromQuery] string ApprovalId)
     {
-        return Ok();
+        var command = new ConfirmationCommand(id, ApprovalId);
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 }

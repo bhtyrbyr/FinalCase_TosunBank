@@ -32,9 +32,9 @@ public class CreateCommand : IRequest<bool>
 
         public async Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
-            var userInRegister = await _userManager.FindByEmailAsync(request.model.Email);
+            var userInCustomer = await _userManager.FindByEmailAsync(request.model.Email);
             var userInPreRegister = await _preRegistrationRepository.FindByNationalityNumberAsync(request.model.NationalityNumber);
-            if ((userInRegister is not null) || (userInPreRegister is not null))
+            if ((userInCustomer is not null) || (userInPreRegister is not null))
                 throw new InvalidDataException("Already exists!");
             var newUser = _mapper.Map<PreRegistration>(request.model);
             await _preRegistrationRepository.CreateAsync(newUser);
