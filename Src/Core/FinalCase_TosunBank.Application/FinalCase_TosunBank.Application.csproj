@@ -22,4 +22,9 @@
     <ProjectReference Include="..\FinalCase_TosunBank.Domain\FinalCase_TosunBank.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Commands\" />
+    <Folder Include="Features\Queries\" />
+  </ItemGroup>
+
 </Project>
