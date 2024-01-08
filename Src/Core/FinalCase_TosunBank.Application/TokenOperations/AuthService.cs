@@ -60,7 +60,7 @@ public class AuthService : IAuthService
         var tokenDesc = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(2),
+            Expires = DateTime.UtcNow.AddMinutes(15),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256),
             Issuer = _configuration["JWT:Issuer"],
             Audience = _configuration["JWT:Audience"],
