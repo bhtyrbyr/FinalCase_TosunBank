@@ -41,6 +41,6 @@ public class GenericRepository<T, IdType> : IGenericRepository<T, IdType> where 
 
     public async void Update(T entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(entity);
     }
 }

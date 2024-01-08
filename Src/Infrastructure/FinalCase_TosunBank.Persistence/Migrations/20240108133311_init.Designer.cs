@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalCase_TosunBank.Persistence.Migrations
 {
     [DbContext(typeof(TosunBankDbContext))]
-    [Migration("20240106153631_initialization-bangin-system-basic-level")]
-    partial class initializationbanginsystembasiclevel
+    [Migration("20240108133311_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,6 +209,49 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                     b.ToTable("Departments");
                 });
 
+            modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.PreRegistration", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("BirthDay")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NationalityNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("isConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PreRegistrations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -366,10 +409,6 @@ namespace FinalCase_TosunBank.Persistence.Migrations
 
                     b.Property<float>("CreditScore")
                         .HasColumnType("real");
-
-                    b.Property<string>("CustomerNo")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<double>("Salary")
                         .HasColumnType("double precision");

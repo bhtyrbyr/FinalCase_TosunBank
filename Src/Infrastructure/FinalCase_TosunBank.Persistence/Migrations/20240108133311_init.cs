@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalCase_TosunBank.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initializationbanginsystembasiclevel : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,26 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Departments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PreRegistrations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    NationalityNumber = table.Column<string>(type: "text", nullable: false),
+                    BirthDay = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    isConfirmed = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PreRegistrations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +92,6 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                     BirthDay = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Discriminator = table.Column<string>(type: "text", nullable: false),
                     DepartmentId = table.Column<byte>(type: "smallint", nullable: true),
-                    CustomerNo = table.Column<string>(type: "text", nullable: true),
                     Salary = table.Column<double>(type: "double precision", nullable: true),
                     SalaryCustomer = table.Column<bool>(type: "boolean", nullable: true),
                     CreditScore = table.Column<float>(type: "real", nullable: true),
@@ -351,6 +370,9 @@ namespace FinalCase_TosunBank.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "PreRegistrations");
 
             migrationBuilder.DropTable(
                 name: "Accounts");

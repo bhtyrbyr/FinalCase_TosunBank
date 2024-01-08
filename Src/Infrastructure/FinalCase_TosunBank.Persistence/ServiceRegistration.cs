@@ -14,11 +14,11 @@ public static class ServiceRegistration
     {
         services.AddDbContext<TosunBankDbContext>(opt =>
         {
-            opt.UseNpgsql(connectionString: connectionString, b => b.MigrationsAssembly("FinalCase_TosunBank.Persistence"));
+            opt.UseNpgsql(connectionString: connectionString);
         });
+
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddIdentity<BasePerson, IdentityRole>().AddEntityFrameworkStores<TosunBankDbContext>().AddDefaultTokenProviders();
-
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IAccountStatementRepository, AccountStatementRepository>();
         services.AddScoped<IAuthorisedRepository, AuthorisedRepository>();

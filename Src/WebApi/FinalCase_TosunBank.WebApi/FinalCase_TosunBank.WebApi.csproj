@@ -26,8 +26,4 @@
     <ProjectReference Include="..\..\Infrastructure\FinalCase_TosunBank.Persistence\FinalCase_TosunBank.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
