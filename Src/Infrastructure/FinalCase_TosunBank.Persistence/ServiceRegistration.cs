@@ -24,6 +24,7 @@ public static class ServiceRegistration
         services.AddScoped<IAuthorisedRepository, AuthorisedRepository>();
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IPreRegistrationRepository, PreRegistrationRepository>();
         return services;
     }
 }

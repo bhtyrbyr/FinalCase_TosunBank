@@ -42,7 +42,7 @@ namespace FinalCase_TosunBank.WebApi.Controllers
         {
             //Departman kaydı oluşturma
             var department = new Department() { Name = "Müşteri Hizmetleri" };
-            _departmentRepo.Create(department);
+            _departmentRepo.CreateAsync(department);
             // Personel ve rol kayıtlarının eklenmesi
             var CustomerRole = new IdentityRole("Customer");
             var PersonnelRole = new IdentityRole("CustomerActionsPersonnel");
@@ -67,7 +67,7 @@ namespace FinalCase_TosunBank.WebApi.Controllers
             await _userManager.CreateAsync(personel, "Qawsedb12*");
             await _userManager.AddToRoleAsync(personel, PersonnelRole.Name);
             department.Authoriseds.Add(personel);
-            _departmentRepo.Update(department);
+            _departmentRepo.UpdateAsync(department);
             var director = new Authorised()
             {
                 FirstName = "Müdür",
@@ -83,7 +83,7 @@ namespace FinalCase_TosunBank.WebApi.Controllers
             await _userManager.CreateAsync(director, "Qawsedb12*");
             await _userManager.AddToRoleAsync(director, DirectorRole.Name);
             department.Authoriseds.Add(director);
-            _departmentRepo.Update(department);
+            _departmentRepo.UpdateAsync(department);
             var admin = new Authorised()
             {
                 FirstName = "Yönetici",
@@ -99,7 +99,7 @@ namespace FinalCase_TosunBank.WebApi.Controllers
             await _userManager.CreateAsync(admin, "Qawsedb12*");
             await _userManager.AddToRoleAsync(admin, AdminRole.Name);
             department.Authoriseds.Add(admin);
-            _departmentRepo.Update(department);
+            _departmentRepo.UpdateAsync(department);
 
             // Müşteri kaydı eklenmesi
             var customer = new Customer()

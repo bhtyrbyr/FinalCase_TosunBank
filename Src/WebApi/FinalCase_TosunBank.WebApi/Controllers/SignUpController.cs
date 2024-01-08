@@ -1,4 +1,5 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
+using FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,21 +18,23 @@ public class SignUpController : ControllerBase
     }
 
     [HttpGet(Name = "GetAllSignUpRegister")]
-    [Authorize(Roles = "CustomerActionsPersonnel")]
-    [Authorize(Roles = "Director")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
     public async Task<IActionResult> GetAll()
     {
-        return Ok();
+        var query = new GetAllQuery();
+        var result = await _mediator.Send(query);
+        if (!result.Any()) return NotFound("No record found!");
+        return Ok(result);
     }
 
-    [HttpGet("/{id}", Name = "GetSignUpRegisterDetail")]
-    [Authorize(Roles = "CustomerActionsPersonnel")]
-    [Authorize(Roles = "Director")]
-    [Authorize(Roles = "Admin")]
+    [HttpGet("{id}", Name = "GetSignUpRegisterDetail")]
+    [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
     public async Task<IActionResult> GetById(int id)
     {
-        return Ok();
+        var query = new GetByIdQuery(id);
+        var result = await _mediator.Send(query);
+        if (result is null) return NotFound("No record found!");
+        return Ok(result);
     }
 
     [HttpPost(Name = "SignUp")]
@@ -41,9 +44,7 @@ public class SignUpController : ControllerBase
     }
 
     [HttpPut("{id}", Name = "ConfigPreRegistration")]
-    [Authorize(Roles = "CustomerActionsPersonnel")]
-    [Authorize(Roles = "Director")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
     public async Task<IActionResult> ConfirmPreRegistration(int id)
     {
         return Ok();
