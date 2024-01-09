@@ -20,11 +20,11 @@ public class ConfirmationCommand : IRequest<string>
 
     public class ConfirmationCommandHander : IRequestHandler<ConfirmationCommand, string>
     {
-        private readonly IPreRegistrationRepository _preRegistrationRepository;
+        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly UserManager<BasePerson> _userManager;
         private readonly IMapper _mapper;
 
-        public ConfirmationCommandHander(IPreRegistrationRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
+        public ConfirmationCommandHander(ICustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _userManager = userManager;
@@ -34,7 +34,7 @@ public class ConfirmationCommand : IRequest<string>
         public async Task<string> Handle(ConfirmationCommand request, CancellationToken cancellationToken)
         {
             var userInPreRegister = await _preRegistrationRepository.GetByIdAsync(request.Id);
-            if((userInPreRegister is null) || (userInPreRegister.isConfirmed))
+            if((userInPreRegister is null))
                 throw new ArgumentNullException("No record found!");
             var AccountOppeningApproval = await _userManager.FindByIdAsync(request.ApprovalId) as Authorised;
             var newCustomer = _mapper.Map<Customer>(userInPreRegister);
@@ -46,8 +46,6 @@ public class ConfirmationCommand : IRequest<string>
                 await _userManager.AddToRoleAsync(newCustomer, "Customer");
                 if (!registerStatus.Succeeded)
                     throw new ArgumentException("Error adding a record!");
-                userInPreRegister.isConfirmed = true;
-                //await _preRegistrationRepository.UpdateAsync(userInPreRegister);
                 await _preRegistrationRepository.DeleteAsync(request.Id);
                 return newCustomer.Id;
             }
@@ -55,7 +53,6 @@ public class ConfirmationCommand : IRequest<string>
             {
                 throw new Exception(ex.Message);
             }
-
         }
     }
 }

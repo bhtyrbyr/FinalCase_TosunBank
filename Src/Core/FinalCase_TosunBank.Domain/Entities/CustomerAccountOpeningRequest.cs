@@ -1,6 +1,6 @@
 ﻿namespace FinalCase_TosunBank.Domain.Entities;
 
-public class PreRegistration
+public class CustomerAccountOpeningRequest
 {
     public int Id { get; set; }
     public string Email { get; set; }
@@ -11,5 +11,4 @@ public class PreRegistration
     public string PhoneNumber { get; set; }
     public string NationalityNumber { get; set; }
     public DateTime BirthDay { get; set; }
-    public bool isConfirmed { get; set; } = false;
 }

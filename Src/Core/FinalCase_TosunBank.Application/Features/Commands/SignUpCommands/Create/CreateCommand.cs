@@ -18,12 +18,12 @@ public class CreateCommand : IRequest<bool>
     }
     public class CreateCommandHandler : IRequestHandler<CreateCommand, bool>
     {
-        private readonly IPreRegistrationRepository _preRegistrationRepository;
+        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly UserManager<BasePerson> _userManager;
         private readonly IMapper _mapper;
 
 
-        public CreateCommandHandler(IPreRegistrationRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
+        public CreateCommandHandler(ICustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _userManager = userManager;
@@ -36,7 +36,7 @@ public class CreateCommand : IRequest<bool>
             var userInPreRegister = await _preRegistrationRepository.FindByNationalityNumberAsync(request.model.NationalityNumber);
             if ((userInCustomer is not null) || (userInPreRegister is not null))
                 throw new InvalidDataException("Already exists!");
-            var newUser = _mapper.Map<PreRegistration>(request.model);
+            var newUser = _mapper.Map<CustomerAccountOpeningRequest>(request.model);
             await _preRegistrationRepository.CreateAsync(newUser);
             request.Id = newUser.Id;
             return true;

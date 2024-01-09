@@ -3,6 +3,7 @@ using System;
 using FinalCase_TosunBank.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalCase_TosunBank.Persistence.Migrations
 {
     [DbContext(typeof(TosunBankDbContext))]
-    partial class TosunBankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109095100_update-account-table-again")]
+    partial class updateaccounttableagain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,7 +221,21 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                     b.ToTable("AccountStatements");
                 });
 
-            modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.CustomerAccountOpeningRequest", b =>
+            modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.Department", b =>
+                {
+                    b.Property<byte>("Id")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.PreRegistration", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,23 +274,12 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomerAccountOpeningRequests");
-                });
-
-            modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.Department", b =>
-                {
-                    b.Property<byte>("Id")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<bool>("isConfirmed")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("PreRegistrations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

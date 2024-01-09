@@ -3,6 +3,7 @@ using System;
 using FinalCase_TosunBank.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalCase_TosunBank.Persistence.Migrations
 {
     [DbContext(typeof(TosunBankDbContext))]
-    partial class TosunBankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109095517_update-preregistration-table-name")]
+    partial class updatepreregistrationtablename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -256,6 +259,9 @@ namespace FinalCase_TosunBank.Persistence.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("isConfirmed")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

@@ -9,10 +9,10 @@ public class GetAllQuery : IRequest<List<SignUpViewDTO>>
 {
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<SignUpViewDTO>>
     {
-        private readonly IPreRegistrationRepository _preRegistrationRepository;
+        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly IMapper _mapper;
 
-        public GetAllQueryHandler(IPreRegistrationRepository preRegistrationRepository, IMapper mapper)
+        public GetAllQueryHandler(ICustomerAccountOpeningRequestRepository preRegistrationRepository, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _mapper = mapper;

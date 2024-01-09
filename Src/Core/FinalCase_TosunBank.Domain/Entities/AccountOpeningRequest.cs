@@ -3,12 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalCase_TosunBank.Domain.Entities;
 
-public class Account : BaseAuditableEntity<int, Authorised>
+public class AccountOpeningRequest : BaseEntity<int>
 {
     public string CustomerId { get; set; }
-
     [ForeignKey("CustomerId")]
     public Customer Customer { get; set; }
-    public double Balance { get; set; }
     public AccountType AccountType { get; set; }
 }

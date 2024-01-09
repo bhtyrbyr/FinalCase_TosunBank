@@ -12,10 +12,10 @@ public class GetByIdQuery : IRequest<SignUpViewDTO>
 
     public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, SignUpViewDTO>
     {
-        private readonly IPreRegistrationRepository _preRegistrationRepository;
+        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly IMapper _mapper;
 
-        public GetByIdQueryHandler(IPreRegistrationRepository preRegistrationRepository, IMapper mapper)
+        public GetByIdQueryHandler(ICustomerAccountOpeningRequestRepository preRegistrationRepository, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _mapper = mapper;

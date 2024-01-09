@@ -9,9 +9,9 @@ public class SingupMappingProfile : Profile
 {
     public SingupMappingProfile()
     {
-        CreateMap<PreRegistration, SignUpViewDTO>();
-        CreateMap<SignUpCreateDTO, PreRegistration>();
-        CreateMap<PreRegistration, Customer>()
+        CreateMap<CustomerAccountOpeningRequest, SignUpViewDTO>();
+        CreateMap<SignUpCreateDTO, CustomerAccountOpeningRequest>();
+        CreateMap<CustomerAccountOpeningRequest, Customer>()
             .ForMember(desc => desc.Id, opt => opt.Ignore())
             .ForMember(desc => desc.SecurityCode, opt => opt.MapFrom(src => src.FirstName.Substring(0,2) + src.LastName.Substring(0, 2) + "@" + src.PhoneNumber.Substring(0, 4)))
             .ForMember(desc => desc.CreditScore, opt => opt.MapFrom(src => 100))
