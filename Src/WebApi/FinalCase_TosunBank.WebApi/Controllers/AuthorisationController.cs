@@ -17,6 +17,19 @@ public class AuthorisationController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpPost("CreateAuthorisation/")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> CreateAuthorisation([FromQuery] string roleName)
+    {
+        var command = new CreateCommand(roleName);
+        var result = await _mediator.Send(command);
+        if (!result)
+            return BadRequest("Failed to create a new record!");
+        return Ok(result);
+
+    }
+
+
     [HttpGet("AuthoriseUser")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AuthoriseUser([FromBody] AuthorisationArrangementDTO model)
