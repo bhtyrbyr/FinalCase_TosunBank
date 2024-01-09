@@ -3,14 +3,14 @@ using MediatR;
 
 namespace FinalCase_TosunBank.Application.Features.Queries.Temp;
 
-public class GetTokenQuery : IRequest<string>
+public class TempGetTokenQuery : IRequest<string>
 {
     private readonly string RoleName;
-    public GetTokenQuery(string roleName)
+    public TempGetTokenQuery(string roleName)
     {
         RoleName = roleName;
     }
-    public class GetTokenQueryHandler : IRequestHandler<GetTokenQuery, string>
+    public class GetTokenQueryHandler : IRequestHandler<TempGetTokenQuery, string>
     {
         private readonly IAuthService _service;
 
@@ -19,9 +19,9 @@ public class GetTokenQuery : IRequest<string>
             _service = service;
         }
 
-        public async Task<string> Handle(GetTokenQuery request, CancellationToken cancellationToken)
+        public async Task<string> Handle(TempGetTokenQuery request, CancellationToken cancellationToken)
         {
-            switch(request.RoleName)
+            switch (request.RoleName)
             {
                 case "CustomerActionsPersonnel": return _service.Login("mtemsilci1", "Qawsedb12*").Result.Message;
                 case "Director": return _service.Login("mudur1", "Qawsedb12*").Result.Message;

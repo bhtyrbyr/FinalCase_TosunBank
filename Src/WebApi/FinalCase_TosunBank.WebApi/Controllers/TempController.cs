@@ -30,7 +30,7 @@ namespace FinalCase_TosunBank.WebApi.Controllers
         [HttpGet("{RoleName}", Name = "GetRoleToken")]
         public async Task<IActionResult> GetAdminToken(string RoleName)
         {
-            var query = new GetTokenQuery(RoleName);
+            var query = new TempGetTokenQuery(RoleName);
             var token = await _mediator.Send(query);
             if (token is not null) return Ok(token);
             else return BadRequest(RoleName + " not found!");

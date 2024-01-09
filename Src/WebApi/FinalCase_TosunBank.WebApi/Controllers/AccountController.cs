@@ -1,7 +1,6 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.AccountDTOs;
 using FinalCase_TosunBank.Application.Features.Commands.AccountCommands;
 using FinalCase_TosunBank.Application.Features.Queries.AccountQueries;
-using FinalCase_TosunBank.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
