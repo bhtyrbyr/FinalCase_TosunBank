@@ -47,6 +47,7 @@ public class BankAccountConfirmationCommand : IRequest<int>
                 newAccount.Customer = customer;
                 newAccount.CreatedBy = AccountOppeningApproval;
                 await _accountRepo.CreateAsync(newAccount);
+                await _accountOpeningRequestRepo.DeleteAsync(accountOpeningRequest.Id);
                 return newAccount.Id;
             }
             catch (Exception ex)

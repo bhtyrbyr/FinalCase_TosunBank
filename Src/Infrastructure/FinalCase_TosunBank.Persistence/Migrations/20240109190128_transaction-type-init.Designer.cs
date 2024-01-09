@@ -3,6 +3,7 @@ using System;
 using FinalCase_TosunBank.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinalCase_TosunBank.Persistence.Migrations
 {
     [DbContext(typeof(TosunBankDbContext))]
-    partial class TosunBankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109190128_transaction-type-init")]
+    partial class transactiontypeinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,7 +234,7 @@ namespace FinalCase_TosunBank.Persistence.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("NewBankAccountOpeningRequest");
+                    b.ToTable("AccountOpeningRequests");
                 });
 
             modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.NewCustomerAccountOpeningRequest", b =>
@@ -275,7 +278,7 @@ namespace FinalCase_TosunBank.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NewCustomerAccountOpeningRequest");
+                    b.ToTable("CustomerAccountOpeningRequests");
                 });
 
             modelBuilder.Entity("FinalCase_TosunBank.Domain.Entities.TransactionType", b =>

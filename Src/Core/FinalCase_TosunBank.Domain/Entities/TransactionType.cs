@@ -1,12 +1,8 @@
-﻿namespace FinalCase_TosunBank.Domain.Entities;
+﻿using FinalCase_TosunBank.Domain.Common;
 
-public enum TransactionType
+namespace FinalCase_TosunBank.Domain.Entities;
+
+public class TransactionType : BaseEntity<byte>
 {
-    DepositMoney,
-    WithdrawalOfFunds,
-    IncomingTransfer,
-    OutgoingTransfer,
-    CreditCardPayment,
-    DirectDebit,
-    LoanRepayment
+    public string Name { get; set; }
 }
