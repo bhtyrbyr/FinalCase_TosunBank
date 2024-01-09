@@ -7,40 +7,37 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FinalCase_TosunBank.Application.Features.Commands.TramsactionCommands;
 
-public class WithdrawalCommand : IRequest<bool>
+public class DepositCommand : IRequest<bool>
 {
-    private readonly WithdrawalDTO Model;
+    private readonly DepositMoneyDTO Model;
 
-    public WithdrawalCommand(WithdrawalDTO model)
+    public DepositCommand(DepositMoneyDTO model)
     {
         Model = model;
     }
 
-    public class WithdrawalCommandHandler : IRequestHandler<WithdrawalCommand, bool>
+    public class DepositCommandHandler : IRequestHandler<DepositCommand, bool>
     {
         private readonly IAccountStatementRepository _accountStatementRepo;
         private readonly UserManager<BasePerson> _userManager;
         private readonly IAccountRepository _accountRepo;
 
-        public WithdrawalCommandHandler(IAccountStatementRepository accountStatementRepo, UserManager<BasePerson> userManager, IAccountRepository accountRepo)
+        public DepositCommandHandler(IAccountStatementRepository accountStatementRepo, UserManager<BasePerson> userManager, IAccountRepository accountRepo)
         {
             _accountStatementRepo = accountStatementRepo;
             _userManager = userManager;
             _accountRepo = accountRepo;
         }
-
-        public async Task<bool> Handle(WithdrawalCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DepositCommand request, CancellationToken cancellationToken)
         {
             var customer = await _userManager.FindByIdAsync(request.Model.CustomerId);
             if (customer is null)
                 throw new ArgumentNullException("No customer record found!");
             var account = await _accountRepo.GetByIdAsync(request.Model.AccountId);
-            if (account is null && account.CustomerId != customer.Id) 
+            if (account is null && account.CustomerId != customer.Id)
                 throw new ArgumentNullException("No account record found!");
-            if (request.Model.AmountToBeWithDrawn > account.Balance)
-                throw new InvalidOperationException("Insufficient account balance!");
             var beforeTransactionBalance = account.Balance;
-            account.Balance -= request.Model.AmountToBeWithDrawn;
+            account.Balance += request.Model.AmountToBeWithDrawn;
             await _accountRepo.UpdateAsync(account);
             var transactionRecord = new AccountStatement()
             {
@@ -48,9 +45,16 @@ public class WithdrawalCommand : IRequest<bool>
                 BalanceBeforeTransaction = beforeTransactionBalance,
                 BalanceAfterTransaction = account.Balance,
                 CreatedAt = DateTime.UtcNow,
-                TransactionTypeId = 2
+                TransactionTypeId = 1
             };
             await _accountStatementRepo.CreateAsync(transactionRecord);
+            try
+            {
+                int cardid = Convert.ToInt32(request.Model.CardNo);
+            }catch(Exception ex)
+            {
+                return false;
+            }
             return true;
         }
     }
