@@ -4,9 +4,8 @@ namespace FinalCase_TosunBank.Domain.Entities;
 
 public class AccountStatement : BaseAuditableEntity<int, Account>
 {
+    public byte TransactionTypeId { get; set; }
     public TransactionType TransactionType { get; set; }
     public double BalanceBeforeTransaction { get; set; }
     public double BalanceAfterTransaction { get; set; }
-
-
 }
