@@ -8,5 +8,5 @@ public class NewBankAccountOpeningRequest : BaseEntity<int>
     public string CustomerId { get; set; }
     [ForeignKey("CustomerId")]
     public Customer Customer { get; set; }
-    public AccountType AccountType { get; set; }
+    public AccountTypeEnum AccountType { get; set; }
 }

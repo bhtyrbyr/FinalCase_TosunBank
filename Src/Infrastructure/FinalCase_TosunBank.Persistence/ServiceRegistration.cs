@@ -26,6 +26,7 @@ public static class ServiceRegistration
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<INewCustomerAccountOpeningRequestRepository, NewCustomerAccountOpeningRequestRepository>();
         services.AddScoped<INewBankAccountOpeningRequestRepository, NewBankAccountOpeningRequestRepository>();
+        services.AddScoped<ITransactionTypeRepository, TransactionTypeRepository>();
         return services;
     }
 }

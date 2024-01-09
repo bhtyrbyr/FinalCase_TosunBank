@@ -1,6 +1,7 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.AccountDTOs;
 using FinalCase_TosunBank.Application.Features.Commands.AccountCommands;
 using FinalCase_TosunBank.Application.Features.Queries.AccountQueries;
+using FinalCase_TosunBank.Application.Features.Queries.BankAccountQueries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,17 @@ public class AccountController : ControllerBase
         var command = new AllBankAccountsOfTheCustomerQuery(id);
         var result = await _mediator.Send(command);
         if(result is null)
+            return NotFound();
+        return Ok(result);
+    }
+
+    [HttpGet("GetAccountDetail/{id}", Name = "CustomerAccountDetail")]
+    //[Authorize(Roles = "Customer")]
+    public async Task<IActionResult> GetAccountDetail(int id)
+    {
+        var command = new BankAccountDetailGetByIdQuery(id);
+        var result = await _mediator.Send(command);
+        if (result is null)
             return NotFound();
         return Ok(result);
     }

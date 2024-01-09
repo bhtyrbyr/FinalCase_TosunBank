@@ -1,6 +1,6 @@
 ﻿namespace FinalCase_TosunBank.Domain.Entities;
 
-public enum AccountType
+public enum AccountTypeEnum
 {
     TimeDepositAccount,
     DemandDepositAccount,
