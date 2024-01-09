@@ -6,37 +6,37 @@ using FinalCase_TosunBank.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Create;
+namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands;
 
-public class CreateCommand : IRequest<bool>
+public class SingUpCreateCommand : IRequest<bool>
 {
     private readonly SignUpCreateDTO model;
     public int Id { get; set; }
-    public CreateCommand(SignUpCreateDTO model)
+    public SingUpCreateCommand(SignUpCreateDTO model)
     {
         this.model = model;
     }
-    public class CreateCommandHandler : IRequestHandler<CreateCommand, bool>
+    public class SingUpCreateCommandHandler : IRequestHandler<SingUpCreateCommand, bool>
     {
-        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
+        private readonly INewCustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly UserManager<BasePerson> _userManager;
         private readonly IMapper _mapper;
 
 
-        public CreateCommandHandler(ICustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
+        public SingUpCreateCommandHandler(INewCustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _userManager = userManager;
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(SingUpCreateCommand request, CancellationToken cancellationToken)
         {
             var userInCustomer = await _userManager.FindByEmailAsync(request.model.Email);
             var userInPreRegister = await _preRegistrationRepository.FindByNationalityNumberAsync(request.model.NationalityNumber);
-            if ((userInCustomer is not null) || (userInPreRegister is not null))
+            if (userInCustomer is not null || userInPreRegister is not null)
                 throw new InvalidDataException("Already exists!");
-            var newUser = _mapper.Map<CustomerAccountOpeningRequest>(request.model);
+            var newUser = _mapper.Map<NewCustomerAccountOpeningRequest>(request.model);
             await _preRegistrationRepository.CreateAsync(newUser);
             request.Id = newUser.Id;
             return true;

@@ -5,36 +5,36 @@ using FinalCase_TosunBank.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Confirmation;
+namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands;
 
-public class ConfirmationCommand : IRequest<string>
+public class SingUpConfirmationCommand : IRequest<string>
 {
     private readonly int Id;
     private readonly string ApprovalId;
 
-    public ConfirmationCommand(int id, string approvalId)
+    public SingUpConfirmationCommand(int id, string approvalId)
     {
         Id = id;
         ApprovalId = approvalId;
     }
 
-    public class ConfirmationCommandHander : IRequestHandler<ConfirmationCommand, string>
+    public class ConfirmationCommandHander : IRequestHandler<SingUpConfirmationCommand, string>
     {
-        private readonly ICustomerAccountOpeningRequestRepository _preRegistrationRepository;
+        private readonly INewCustomerAccountOpeningRequestRepository _preRegistrationRepository;
         private readonly UserManager<BasePerson> _userManager;
         private readonly IMapper _mapper;
 
-        public ConfirmationCommandHander(ICustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
+        public ConfirmationCommandHander(INewCustomerAccountOpeningRequestRepository preRegistrationRepository, UserManager<BasePerson> userManager, IMapper mapper)
         {
             _preRegistrationRepository = preRegistrationRepository;
             _userManager = userManager;
             _mapper = mapper;
         }
 
-        public async Task<string> Handle(ConfirmationCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SingUpConfirmationCommand request, CancellationToken cancellationToken)
         {
             var userInPreRegister = await _preRegistrationRepository.GetByIdAsync(request.Id);
-            if((userInPreRegister is null))
+            if (userInPreRegister is null)
                 throw new ArgumentNullException("No record found!");
             var AccountOppeningApproval = await _userManager.FindByIdAsync(request.ApprovalId) as Authorised;
             var newCustomer = _mapper.Map<Customer>(userInPreRegister);
@@ -49,7 +49,7 @@ public class ConfirmationCommand : IRequest<string>
                 await _preRegistrationRepository.DeleteAsync(request.Id);
                 return newCustomer.Id;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

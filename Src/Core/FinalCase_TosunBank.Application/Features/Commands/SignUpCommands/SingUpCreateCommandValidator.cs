@@ -2,11 +2,11 @@
 using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Create;
+namespace FinalCase_TosunBank.Application.Features.Commands.SignUpCommands;
 
-public class CreateCommandValidator : AbstractValidator<SignUpCreateDTO>
+public class SingUpCreateCommandValidator : AbstractValidator<SignUpCreateDTO>
 {
-    public CreateCommandValidator()
+    public SingUpCreateCommandValidator()
     {
         RuleFor(cmd => cmd.Email)
             .EmailAddress().WithMessage("Please enter a valid email address.");

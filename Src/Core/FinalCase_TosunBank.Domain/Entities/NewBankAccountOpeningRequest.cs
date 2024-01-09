@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalCase_TosunBank.Domain.Entities;
 
-public class AccountOpeningRequest : BaseEntity<int>
+public class NewBankAccountOpeningRequest : BaseEntity<int>
 {
     public string CustomerId { get; set; }
     [ForeignKey("CustomerId")]

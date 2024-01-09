@@ -10,7 +10,10 @@ public class AccountMappingProfile : Profile
     {
         CreateMap<Account, AccountSimplifiedViewDTO>()
             .ForMember(dest => dest.AccountType, opt => opt.MapFrom(src => Enum.GetName(typeof(AccountType), src.AccountType).ToString()));
-        CreateMap<NewAccountRequestDTO, AccountOpeningRequest>()
+        CreateMap<NewAccountRequestDTO, NewBankAccountOpeningRequest>()
             .ForMember(dest => dest.AccountType, opt => opt.MapFrom(src => (AccountType)src.AccountTypeId));
+        CreateMap<NewBankAccountOpeningRequest, Account>()
+            .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => 0.0f))
+            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
     }
 }

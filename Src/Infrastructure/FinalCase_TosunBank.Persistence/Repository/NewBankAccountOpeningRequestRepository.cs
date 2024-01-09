@@ -5,9 +5,9 @@ using FinalCase_TosunBank.Persistence.Context;
 
 namespace FinalCase_TosunBank.Persistence.Repository;
 
-public class AccountOpeningRequestRepository : GenericRepository<AccountOpeningRequest, int>, IAccountOpeningRequestRepository
+public class NewBankAccountOpeningRequestRepository : GenericRepository<NewBankAccountOpeningRequest, int>, INewBankAccountOpeningRequestRepository
 {
-    public AccountOpeningRequestRepository(TosunBankDbContext dbContext) : base(dbContext)
+    public NewBankAccountOpeningRequestRepository(TosunBankDbContext dbContext) : base(dbContext)
     {
     }
 }

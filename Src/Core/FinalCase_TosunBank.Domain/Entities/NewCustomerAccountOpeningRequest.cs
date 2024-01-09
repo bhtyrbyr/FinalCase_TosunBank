@@ -1,6 +1,6 @@
 ﻿namespace FinalCase_TosunBank.Domain.Entities;
 
-public class CustomerAccountOpeningRequest
+public class NewCustomerAccountOpeningRequest
 {
     public int Id { get; set; }
     public string Email { get; set; }

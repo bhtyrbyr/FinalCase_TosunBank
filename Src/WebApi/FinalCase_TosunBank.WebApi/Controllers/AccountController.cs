@@ -30,11 +30,33 @@ public class AccountController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPut("ConfirmNewAccount/{id}", Name = "ConfirmNewAccountOpeningRequest")]
+    [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
+    public async Task<IActionResult> ConfirmNewAccountOpeningRequest(int id, [FromQuery] string ApprovalId)
+    {
+        var command = new BankAccountConfirmationCommand(id, ApprovalId);
+        var result = await _mediator.Send(command);
+        if (result == 0)
+            return BadRequest();
+        return Ok(result);
+    }
+
+    [HttpGet("NewAccount/", Name = "GetAccountOpeningRequestAll")]
+    [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
+    public async Task<IActionResult> GetAccountOpeningRequestAll()
+    {
+        var command = new GetNewBankAccountOpeningRequestGetAllQuery();
+        var result = await _mediator.Send(command);
+        if (result is null)
+            return NotFound();
+        return Ok(result);
+    }
+
     [HttpGet("NewAccount/{id}", Name = "GetAccountOpeningRequestById")]
     [Authorize(Roles = "Customer,CustomerActionsPersonnel,Director,Admin")]
     public async Task<IActionResult> GetAccountOpeningRequestById(int id)
     {
-        var command = new GetNewAccountOpeningRequestByIdQuery(id);
+        var command = new GetNewBankAccountOpeningRequestGetByIdQuery(id);
         var result = await _mediator.Send(command);
         if(result is null)
             return NotFound();
@@ -45,7 +67,7 @@ public class AccountController : ControllerBase
     [Authorize(Roles = "Customer")]
     public async Task<IActionResult> NewAccountRequest([FromBody] NewAccountRequestDTO model)
     {
-        var command = new NewAccountCommand(model);
+        var command = new NewBankAccountCommand(model);
         var result = await _mediator.Send(command);
         if (!result)
             return BadRequest();

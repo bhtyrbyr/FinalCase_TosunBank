@@ -16,7 +16,7 @@ public class TosunBankDbContext : IdentityDbContext<BasePerson, IdentityRole, st
     public DbSet<Department> Departments { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<AccountStatement> AccountStatements { get; set; }
-    public DbSet<CustomerAccountOpeningRequest> CustomerAccountOpeningRequests { get; set; }
-    public DbSet<AccountOpeningRequest> AccountOpeningRequests { get; set; }
+    public DbSet<NewCustomerAccountOpeningRequest> CustomerAccountOpeningRequests { get; set; }
+    public DbSet<NewBankAccountOpeningRequest> AccountOpeningRequests { get; set; }
     #endregion
 }

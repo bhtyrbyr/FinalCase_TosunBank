@@ -1,6 +1,5 @@
 ﻿using FinalCase_TosunBank.Application.DTOs.CustomerDTOs;
-using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Confirmation;
-using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands.Create;
+using FinalCase_TosunBank.Application.Features.Commands.SignUpCommands;
 using FinalCase_TosunBank.Application.Features.Queries.SingUpQueries;
 using FluentValidation;
 using MediatR;
@@ -43,9 +42,9 @@ public class SignUpController : ControllerBase
     [HttpPost(Name = "SignUp")]
     public async Task<IActionResult> SignUp([FromBody] SignUpCreateDTO model)
     {
-        var commandValidator = new CreateCommandValidator();
+        var commandValidator = new SingUpCreateCommandValidator();
         await commandValidator.ValidateAndThrowAsync(model);
-        var command = new CreateCommand(model);
+        var command = new SingUpCreateCommand(model);
         var result = await _mediator.Send(command);
         if (result)
             return CreatedAtAction(nameof(GetById), new { id = command.Id }, null);
@@ -56,7 +55,7 @@ public class SignUpController : ControllerBase
     [Authorize(Roles = "CustomerActionsPersonnel,Director,Admin")]
     public async Task<IActionResult> ConfirmPreRegistration(int id, [FromQuery] string ApprovalId)
     {
-        var command = new ConfirmationCommand(id, ApprovalId);
+        var command = new SingUpConfirmationCommand(id, ApprovalId);
         var result = await _mediator.Send(command);
         return Ok(result);
     }
